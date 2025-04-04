@@ -1,0 +1,44 @@
+.dashboard-container {
+  padding: 2rem;
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .dashboard-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+  }
+
+  .dashboard-actions {
+    display: flex;
+    gap: 1rem;
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-weight: bold;
+      border: none;
+      border-radius: var(--radius);
+      background-color: var(--primary);
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
