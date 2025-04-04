@@ -3,13 +3,18 @@
 Esta plataforma permite a usuarios con distintos roles (Super Administrador y Administrador) gestionar campañas publicitarias, consultar métricas y mostrar resultados en una landing pública.
 
 ## Tecnologías utilizadas
-**Backend**: Django + Django REST Framework
-**Autenticación**: JWT (djangorestframework-simplejwt)
-**Base de datos**: PostgreSQL
-**Orquestación**: Docker Compose
+
+- **Backend**: Django + Django REST Framework
+
+- **Autenticación**: JWT (djangorestframework-simplejwt)
+
+- **Base de datos**: PostgreSQL
+
+- **Orquestación**: Docker Compose
 
 ## Estructura de carpetas
 - backend/: contiene el código fuente de la API en Django
+- frontend/: contiene la aplicación con VITE + React
 - docker-compose.yml: orquesta los servicios de backend y base de datos
 
 ## Instalación
@@ -19,20 +24,32 @@ Esta plataforma permite a usuarios con distintos roles (Super Administrador y Ad
 git clone https://github.com/domer36/campaigns-project.git
 ```
 
-2. Crear el archivo .env en la carpeta backend/ con el siguiente contenido:
-```bash
-# PostgreSQL config
-POSTGRES_DB=dbname
-POSTGRES_USER=username
-POSTGRES_PASSWORD=userpassword
+2. Variables de entorno
+Crear archivo .env en la raiz de la app.
 
-# Backend config
-DATABASE_NAME=dbname
-DATABASE_USER=username
-DATABASE_PASSWORD=userpassword
-DATABASE_HOST=db # Nombre del servicio en docker compose
+Estas variables son las que permiten crear la base de datos en PostgreSQL, el usuario y contraseña. 
+```bash
+# PostgreSQL
+POSTGRES_DB=admin
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+```
+
+Crear archivo .env dentro del directorio backend, es la configuración para conectarse a la base de datos y los host permitidos que podrán consumir el servicio.
+```bash
+DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1
+DATABASE_NAME=admin # Nombre de la base de datos (tiene que ser el mismo que el archivo inicial)
+DATABASE_USER=postgres
+DATABASE_PASSWORD=postgres
+DATABASE_HOST=db # Nombre del host de la base de datos, si corre con docker-compose 'db' es el nombre que se le asigna.
 DATABASE_PORT=5432
-SECRET_KEY=your_secret_key
+
+CORS_ALLOWED_ORIGINS=http://localhost:8080,http://127.0.0.1:8080 # Habilitamos los CORS para estos origenes, el puerto 8080 es el configurado en docker compose
+CSRF_TRUSTED_ORIGINS=https://localhost
+```
+Crear archivo .env dentro del directorio frontend, para indicar donde se encuentra el backend.
+```bash
+VITE_API_BASE_URL=http://localhost:8001/api
 ```
 3. Construir los contenedores
 ```bash
@@ -44,7 +61,7 @@ docker-compose up --build
 docker-compose exec web python manage.py createsuperuser
 ```
 
-5. Modificar el rol del super usuario desde el admin de Django: http://localhost:8000/admin/
+5. Modificar el rol del super usuario desde el admin de Django: http://localhost:8001/admin/
 
 ## Endpoints disponibles
 ### Autenticación
