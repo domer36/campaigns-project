@@ -1,6 +1,3 @@
-// AuthContext con manejo de sesión y JWT
-// src/core/auth/AuthContext.tsx
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
