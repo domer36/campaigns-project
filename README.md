@@ -44,29 +44,50 @@ docker-compose up --build
 docker-compose exec web python manage.py createsuperuser
 ```
 
-5. Modificar el rol del super usuario desde el admin de Django
+5. Modificar el rol del super usuario desde el admin de Django: http://localhost:8000/admin/
 
 ## Endpoints disponibles
 ### Autenticación
-POST /api/login/: obtener token de acceso y refresh
-POST /api/token/refresh/: renovar token de acceso
+
+**Obtener token de acceso y refresh**
+- POST /api/login/
+
+**Renovar token de acceso**
+- POST /api/token/refresh/
 
 ### Usuarios
-POST /api/register/: solo el Superadmin puede crear usuarios
-GET /api/users/: listado de usuarios (solo Superadmin)
+**Registrar usuarios (solo Superadmin)**
+- POST /api/register/
+
+**Listado de usuarios (solo Superadmin)**
+- GET /api/users/
 
 ### Campañas
-GET /api/campaigns/: lista campañas (Superadmin ve todas, Admin solo las suyas)
-GET /api/campaigns/?status=ACTIVE: filtro por estatus
-POST /api/campaigns/: crear campaña
-PUT /api/campaigns/<id>/: actualizar campaña (solo dueño o Superadmin)
-DELETE /api/campaigns/<id>/: eliminar campaña (solo Superadmin)
+
+**Listado de campañas**
+
+Superadmin ve todas, Admin solo las suyas
+- GET /api/campaigns/
+
+**Filtro por estatus**
+- GET /api/campaigns/?status=ACTIVE
+
+**Crear nueva campaña**
+- POST /api/campaigns/
+
+**Actualizar campaña**
+
+Superadmin puede modificar todas, y cada admin solo las suyas.
+- PUT /api/campaigns/<id>/
+
+**Eliminar campaña (solo Superadmin)**
+- DELETE /api/campaigns/<id>/
 
 ### Dashboard
-GET /api/dashboard/: muestra total de campañas, presupuesto y desglose por estatus
+**Mostrar resumen de campañas**
 
-### Landing pública
-GET /api/landing/<id>/: muestra título, descripción
+Muestra total de campañas, presupuesto y desglose por estatus.
+- GET /api/dashboard/
 
 ## Autenticación
 Para endpoints protegidos se requiere enviar el token en los headers:
