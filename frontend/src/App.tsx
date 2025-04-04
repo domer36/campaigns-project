@@ -9,6 +9,7 @@ import { AuthProvider } from "./core/auth/AuthContext";
 import LoginPage from "./pages/Login/LoginPage";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import PrivateRoute from "./core/auth/PrivateRoute";
+import CampaignsPage from "./pages/Campaigns/CampaignsPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/campaigns" element={<CampaignsPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
