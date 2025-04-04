@@ -7,6 +7,19 @@ interface Props {
   canDelete: boolean;
 }
 
+const formatStatus = (status: string) => {
+  switch (status) {
+    case "ACTIVE":
+      return "Activa";
+    case "PAUSED":
+      return "Pausada";
+    case "FINISHED":
+      return "Finalizada";
+    default:
+      return status;
+  }
+};
+
 const CampaignCard = ({
   title,
   status,
@@ -18,7 +31,7 @@ const CampaignCard = ({
   return (
     <div className="campaign-card" onClick={onClick}>
       <h3>{title}</h3>
-      <p>Status: {status}</p>
+      <p>Status: {formatStatus(status)}</p>
       <p>Presupuesto: ${budget}</p>
       {canDelete && (
         <button

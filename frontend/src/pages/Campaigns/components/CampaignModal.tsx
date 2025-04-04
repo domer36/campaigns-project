@@ -7,22 +7,27 @@ interface Props {
   initialData?: any;
 }
 
+const defaultForm = {
+  title: "",
+  description: "",
+  start_date: "",
+  end_date: "",
+  budget: "",
+  status: "ACTIVE",
+  reach_estimate: "",
+};
+
 const CampaignModal = ({ open, onClose, onSubmit, initialData }: Props) => {
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    start_date: "",
-    end_date: "",
-    budget: "",
-    reach_estimate: "",
-    status: "ACTIVE",
-  });
+  const [form, setForm] = useState(defaultForm);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (initialData) {
       setForm(initialData);
+    } else {
+      setForm(defaultForm);
     }
-  }, [initialData]);
+  }, [initialData, open]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -33,6 +38,11 @@ const CampaignModal = ({ open, onClose, onSubmit, initialData }: Props) => {
   };
 
   const handleSubmit = () => {
+    if (!form.title || !form.budget || !form.start_date || !form.end_date) {
+      setError("Por favor completa todos los campos obligatorios.");
+      return;
+    }
+    setError("");
     onSubmit(form);
     onClose();
   };
@@ -84,6 +94,7 @@ const CampaignModal = ({ open, onClose, onSubmit, initialData }: Props) => {
           <option value="PAUSED">Pausada</option>
           <option value="FINISHED">Finalizada</option>
         </select>
+        {error && <p className="error-message">{error}</p>}
 
         <div className="modal-actions">
           <button onClick={onClose}>Cancelar</button>
