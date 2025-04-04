@@ -6,3 +6,8 @@ class CampaignSerializer(serializers.ModelSerializer):
         model = Campaign
         fields = '__all__'
         read_only_fields = ('created_by', 'created_at')
+
+class CampaignLandingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Campaign
+        fields = ('title', 'description', 'reach_estimate')
