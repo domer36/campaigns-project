@@ -14,6 +14,7 @@ const CampaignModal = ({ open, onClose, onSubmit, initialData }: Props) => {
     start_date: "",
     end_date: "",
     budget: "",
+    reach_estimate: "",
     status: "ACTIVE",
   });
 
@@ -71,6 +72,12 @@ const CampaignModal = ({ open, onClose, onSubmit, initialData }: Props) => {
           value={form.budget}
           onChange={handleChange}
           placeholder="Presupuesto"
+        />
+        <input
+          name="reach_estimate"
+          value={form.reach_estimate}
+          onChange={handleChange}
+          placeholder="Alcance estimado"
         />
         <select name="status" value={form.status} onChange={handleChange}>
           <option value="ACTIVE">Activa</option>

@@ -65,7 +65,7 @@ const CampaignsPage = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const res = await fetch(`${API_URLS.CAMPAIGNS}/${id}/`, {
+      const res = await fetch(`${API_URLS.CAMPAIGNS}${id}/`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

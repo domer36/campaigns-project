@@ -20,7 +20,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <div className="landing-header">
-        <h2>Campañas públicas</h2>
+        <h2>Campañas publicitarias</h2>
         <button onClick={() => navigate("/login")}>Iniciar sesión</button>
       </div>
 

@@ -25,7 +25,7 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/campaigns" element={<CampaignsPage />} />
           </Route>
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/landing" />} />
         </Routes>
       </AuthProvider>
     </Router>

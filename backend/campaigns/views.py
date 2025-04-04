@@ -1,4 +1,6 @@
 from rest_framework import viewsets, permissions, filters, response, views
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .models import Campaign
 from .serializers import CampaignSerializer, CampaignLandingSerializer
 from .permissions import IsSuperAdminOrReadOnly, IsOwnerOrSuperAdmin
@@ -8,7 +10,7 @@ from django.db import models
 class CampaignViewSet(viewsets.ModelViewSet):
     serializer_class = CampaignSerializer
     permission_classes = [IsSuperAdminOrReadOnly, IsOwnerOrSuperAdmin]
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend]
     filterset_fields  = ['status']
 
     def get_queryset(self):
