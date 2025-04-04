@@ -10,4 +10,4 @@ class CampaignSerializer(serializers.ModelSerializer):
 class CampaignLandingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign
-        fields = ('title', 'description', 'reach_estimate')
+        fields = ('id', 'title', 'description', 'reach_estimate')

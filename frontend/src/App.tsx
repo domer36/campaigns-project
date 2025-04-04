@@ -10,6 +10,8 @@ import LoginPage from "./pages/Login/LoginPage";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import PrivateRoute from "./core/auth/PrivateRoute";
 import CampaignsPage from "./pages/Campaigns/CampaignsPage";
+import LandingPage from "./pages/Landing/LandingPage";
+import CampaignDetailPage from "./pages/Landing/CampaignDetailPage";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/landing/:id" element={<CampaignDetailPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/campaigns" element={<CampaignsPage />} />
