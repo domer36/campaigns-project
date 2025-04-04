@@ -12,6 +12,7 @@ import PrivateRoute from "./core/auth/PrivateRoute";
 import CampaignsPage from "./pages/Campaigns/CampaignsPage";
 import LandingPage from "./pages/Landing/LandingPage";
 import CampaignDetailPage from "./pages/Landing/CampaignDetailPage";
+import UsersPage from "./pages/Users/UsersPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/landing/:id" element={<CampaignDetailPage />} />
           <Route element={<PrivateRoute />}>
+            <Route path="/users" element={<UsersPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/campaigns" element={<CampaignsPage />} />
           </Route>

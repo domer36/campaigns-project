@@ -18,7 +18,7 @@ interface DashboardData {
 
 const DashboardPage = () => {
   const [data, setData] = useState<DashboardData | null>(null);
-  const { token, user } = useAuth();
+  const { token, user, logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +41,9 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard-container">
+      <button className="logout" onClick={logout}>
+        Cerrar sesión
+      </button>
       <h2>Dashboard</h2>
 
       <div className="dashboard-actions">
