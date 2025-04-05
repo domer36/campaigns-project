@@ -1,6 +1,8 @@
 from rest_framework import viewsets, permissions, filters, response, views
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .models import Campaign
-from .serializers import CampaignSerializer
+from .serializers import CampaignSerializer, CampaignLandingSerializer
 from .permissions import IsSuperAdminOrReadOnly, IsOwnerOrSuperAdmin
 
 from django.db import models
@@ -8,7 +10,7 @@ from django.db import models
 class CampaignViewSet(viewsets.ModelViewSet):
     serializer_class = CampaignSerializer
     permission_classes = [IsSuperAdminOrReadOnly, IsOwnerOrSuperAdmin]
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend]
     filterset_fields  = ['status']
 
     def get_queryset(self):
@@ -50,3 +52,23 @@ class CampaignDashboardView(views.APIView):
             'total_budget': float(total_budget),
             'campaigns': campaigns_summary
         })
+    
+class CampaignLandingView(views.APIView):
+    queryset = Campaign.objects.all()
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, id=None):
+        if id:
+            try:
+                campaign = Campaign.objects.get(id=id)
+            except Campaign.DoesNotExist:
+                return response.Response({'detail': 'Not found.'}, status=404)
+
+            return response.Response({
+                "title": campaign.title,
+                "description": campaign.description,
+                "reach_estimate": campaign.reach_estimate
+            })
+        campaigns = Campaign.objects.all()
+        serializer = CampaignLandingSerializer(campaigns, many=True)
+        return response.Response(serializer.data)

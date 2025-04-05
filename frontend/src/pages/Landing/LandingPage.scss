@@ -1,0 +1,59 @@
+.landing-page {
+  padding: 2rem;
+  background: #f4f6f8;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+
+  button {
+    background-color: var(--primary);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
+
+.landing-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.landing-detail {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 700px;
+  margin: 0 auto;
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 1.25rem;
+  }
+
+  strong {
+    color: #222;
+  }
+}
