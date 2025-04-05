@@ -31,8 +31,6 @@ services:
       - backend
     env_file:
       - ./frontend/.env
-    networks:
-      - app-network
 
 volumes:
   postgres_data:
