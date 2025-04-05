@@ -12,9 +12,9 @@ const CampaignsPage = () => {
   const [selected, setSelected] = useState<any | null>(null);
   const [open, setOpen] = useState(false);
 
-  const fetchCampaigns = async () => {
+  const fetchCampaigns = async (status = "") => {
     try {
-      const res = await fetch(API_URLS.CAMPAIGNS, {
+      const res = await fetch(`${API_URLS.CAMPAIGNS}?status=${status}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const json = await res.json();
@@ -87,14 +87,29 @@ const CampaignsPage = () => {
   return (
     <div className="campaigns-container">
       <h2>Campañas</h2>
-      <button
-        onClick={() => {
-          setSelected(null);
-          setOpen(true);
-        }}
-      >
-        Nueva campaña
-      </button>
+      <div className="campaigns-options">
+        <button
+          onClick={() => {
+            setSelected(null);
+            setOpen(true);
+          }}
+        >
+          Nueva campaña
+        </button>
+        <select
+          className="campaigns-filter"
+          onChange={async ({ target }) => {
+            const { value } = target;
+            console.log(value);
+            await fetchCampaigns(value);
+          }}
+        >
+          <option value="">Todas</option>
+          <option value="ACTIVE">Activas</option>
+          <option value="PAUSED">Pausadas</option>
+          <option value="FINISHED">Finalizadas</option>
+        </select>
+      </div>
 
       <div className="campaigns-grid">
         {campaigns.map((c) => (
